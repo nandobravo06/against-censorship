@@ -15,8 +15,8 @@ Class Core{
         //var_dump($parametros);
 
         if(!$parametros[0]){
-
-            call_user_func_array(array("LoginController", 'index'),$parametros);
+            //echo('aqui.......');
+            call_user_func_array(array("LoginController", 'index'),array($parametros));
             
         }else{
             
@@ -25,6 +25,10 @@ Class Core{
             array_shift($parametros);
 
             $metodo = @$parametros[0];
+
+            if(!$metodo){
+                $metodo='index';
+            }
 
             array_shift($parametros);
 

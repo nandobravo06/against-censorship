@@ -1,6 +1,6 @@
 <?php
 
-require_once('Controller/Core.php');
+require_once('app/Controller/Core.php');
 
 //var_dump($_GET['url']);
 

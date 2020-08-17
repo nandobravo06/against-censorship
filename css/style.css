@@ -1,0 +1,129 @@
+:root{
+
+	--cor_fundo_cabecalho_escuro: #011627;
+	--cor_fundo_claro: #fdfffc;
+	--cor_concordo: #2ec4b6;
+	--cor_discordo: #e71d36;
+	--cor_laranja: #ff9f1c;
+}
+
+.publicacao{
+	height: 5rem !important;
+	background-color: var(--cor_laranja) !important;
+	opacity: 0.2!important;
+	border-radius: 1rem !important;
+}
+
+.publicacao:hover{
+	
+	opacity: 0.7 !important;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	font-weight: bold;
+	
+
+}
+.publicacao:focus{
+	opacity: 0.7 !important;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	font-weight: bold;
+	
+}
+
+.concordo{
+	background-color: var(--cor_concordo) !important;
+	opacity: 0.6;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+	text-align: center !important;
+	font-size:2rem !important;
+	margin-top:2rem;
+}
+.concordo:hover{
+	opacity:1;
+}
+.discordo:hover{
+	opacity:1;
+}
+.modal-concordo{
+	background-color: var(--cor_concordo) !important;
+	opacity: 0.9;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+}
+
+.modal-discordo{
+	background-color: var(--cor_discordo) !important;
+	opacity: 0.9;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+}
+
+.discordo{
+	background-color: var(--cor_discordo) !important;
+	opacity: 0.6;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+	text-align: center !important;
+	font-size:2rem !important;
+	margin-top:2rem;
+}
+.postagens-publicadas{
+	padding-top: 2rem;
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+	font-size:2rem !important;
+	padding-bottom: 1rem;
+}
+.postagens-publicadas:hover{
+	color: var(--cor_fundo_cabecalho_escuro) !important;
+	text-decoration: none !important;
+	font-size:2rem !important;
+}
+.lixeira{
+	display:block;
+	width: 2rem;
+	height: 2rem;
+	opacity: 0.5;
+	margin: auto;
+}
+.quatidade_likes{
+	/*margin-left: 1rem;*/
+	font-size: 2rem;
+	clear: both;
+}
+.lixeira:hover{
+	opacity: 1;
+}
+.like{
+	border-radius: 2rem;
+	width: 3rem;
+	height: 3rem;
+
+}
+
+.modal-publicacao{
+	height: 5rem !important;
+	background-color: var(--cor_fundo_claro) !important;
+	opacity: 1;
+	border-radius: 1rem !important;
+}
+
+.imagem{
+	margin-bottom:2rem;
+}
+
+
+.jquery-modal > div{
+	padding-top: 2rem;
+	height: auto;
+}
+.close-modal{
+	margin-top:1rem;
+	margin-right: 1rem;
+}
+
+
+.jquery-modal input[type="submit"]{
+	margin-bottom: 1rem;
+	
+}

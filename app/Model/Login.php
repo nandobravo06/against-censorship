@@ -2,16 +2,11 @@
 
 class Login{
     
-    private $pdo = null; 
-
-    function __construct(){
-
-        $pdo = new PDO('mysql:host=localhost;dbname=vsm','root','');
-
     
-    }
 
     function logar(){
+
+        $pdo = new PDO('mysql:host=localhost;dbname=vsm','root','');
 
         $login = @$_POST['login'];
         $senhacrua = @$_POST['senha'];
