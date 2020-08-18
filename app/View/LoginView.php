@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Minha página de teste</title>
+	<title>Login</title>
 	{{meta}}
 	<?php
 		include('./Template/Partial/meta.php');
@@ -12,7 +12,6 @@
 
 <body>
 	<div class="container">
-		<div id="concordo">teste</div>
 
 		<div class="row">
 			<form class="col-12" action="login/logar" method="POST">
@@ -27,7 +26,5 @@
 		</div>
 	</div>
 
- 
-<script type="text/javascript" src="js/interno.js"></script>
 </body>
 </html>

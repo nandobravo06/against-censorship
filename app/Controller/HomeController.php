@@ -1,15 +1,24 @@
 <?php
 
+include_once('app/Model/Home.php');
+
 class HomeController{
 
     public function index($parametros){
 
-        echo('na HomeController');
+        //echo ('homecontroller index');
 
-        var_dump($parametros);
+        if (!isset($_SESSION)){
+            
+            session_start();
+        }
 
-        echo('entrou no index da HomeController');
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] ){
+            
+            header('location:'.$GLOBALS['url'].'postagem/index');
+            
+        }
+        
     }
-
 
 }

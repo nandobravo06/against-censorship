@@ -3,10 +3,13 @@
 require_once ('HomeController.php');
 require_once ('ErroController.php');
 require_once ('LoginController.php');
+require_once ('PostagemController.php');
 
 Class Core{
 
     public function start(){
+
+        $GLOBALS['url']='http://localhost/against-censorship/';
 
         $url = @$_GET['url'];
 
@@ -36,13 +39,15 @@ Class Core{
                 //echo("controller encontrada");
 
                 if($metodo && method_exists($controller, $metodo)){
-                    
+                    //echo("1");  
                     call_user_func_array(array($controller, $metodo),array($parametros));
 
                 }else{
+                    //echo("2"); 
                     call_user_func_array(array("ErroController", 'index'),$parametros);
                 }
             }else{
+                //echo("3"); 
                 call_user_func_array(array("ErroController", 'index'),$parametros);
             }
         }

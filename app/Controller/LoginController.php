@@ -6,30 +6,54 @@ class LoginController{
 
     public function index($parametros){
 
+        //header('location:'.$GLOBALS['url'].'login');
+
         if (!isset($_SESSION)){
-            //echo('<br>entrou no isset <br>');
+            
             session_start();
+            $tela = file_get_contents('app/View/LoginView.php');
+            $meta = str_replace('{{url}}',$GLOBALS['url'],file_get_contents('app/View/Template/Partial/meta.php'));
+            echo(str_replace('{{meta}}',$meta,$tela));
         
         }
-        if(isset($_SESSION['logado']) && $_SESSION['logado']){
-            echo("logado");
-            header('location:home');
-            //call_user_func_array(array("HomeController", "index"),$parametros);
+        else if(isset($_SESSION['logado']) && $_SESSION['logado']){
+
+            //echo("LC 19");
+            header('location:'.$GLOBALS['url'].'home');
+
         }else{
-            //header('location:app/View/LoginView.php');
-            //readfile('app/View/LoginView.php');
+
             $tela = file_get_contents('app/View/LoginView.php');
-            $meta = file_get_contents('app/View/Template/Partial/meta.php');
+            $meta = str_replace('{{url}}',$GLOBALS['url'],file_get_contents('app/View/Template/Partial/meta.php'));
             echo(str_replace('{{meta}}',$meta,$tela));
         }
     
     }
 
     public function logar(){
-        echo('entrou no logar...');
+
+        //echo('entrou no logar...');
         $login = new Login;
-        echo($login->logar());
-    
+        //$resultado = $login->logar();
+        if(($login->logar())==1){
+            echo("LC 37");
+            //header_remove(); 
+            
+            header('location:'.$GLOBALS['url'].'home');
+            //redirect('/login');
+        }
+        else{
+            //echo("LC 41");
+            header_remove();
+            header('location:'.$GLOBALS['url'].'login');
+        }
+    }
+    public function deslogar(){
+        if (isset($_SESSION)){
+            session_destroy();
+        }
+        //echo("LC 49");
+        header('location:'.$GLOBALS['url'].'login');
     }
 
 }

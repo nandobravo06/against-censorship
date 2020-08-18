@@ -1,16 +1,12 @@
-<?php
+<?php 
+
+require_once('ConexaoBD.php');
 
 Class Postagem{
+ 
+    public function publicar_postagem(){
 
-    private $pdo = null; 
-
-    function __construct(){
-
-        $pdo = new PDO('mysql:host=localhost;dbname=vsm','root','');
-    
-    }
-    
-    function publicar_postagem(){
+        $pdo = ConexaoBD::get_conexao();
 
         $id_postagem_pai = @$_GET['id_postagem_pai'];
        
@@ -51,7 +47,9 @@ Class Postagem{
         }
     }
 
-    function excluir_postagem(){
+    public function excluir_postagem(){
+
+        $pdo = ConexaoBD::get_conexao();
 
         $id_postagem = @$_GET['id_postagem'];
 
@@ -75,7 +73,7 @@ Class Postagem{
         }
     }
 
-    function salvar_imagens(){
+    public function salvar_imagens(){
 
         $uploaddir = 'arquivos/imagens_postagens/';
         
@@ -122,6 +120,29 @@ Class Postagem{
                     
         }
 
+    }
+    public function listar_postagens(){
+
+        $pdo = ConexaoBD::get_conexao();
+
+        if (!isset($_SESSION)){
+            //echo('<br>entrou no isset <br>');
+            session_start();
+    
+        }
+    
+        //require('like_postagem.php');
+    
+        $id_usuario = @$_SESSION['id_usuario'];
+    
+        //echo("<br>"."SELECT texto_conteudo, id_postagem, list_imagens FROM POSTAGENS WHERE ID_PAI is NULL and id_usuario !=".$_SESSION['id_usuario'].";");
+    
+        $consulta = $pdo->query("SELECT texto_conteudo, id_postagem, list_imagens, id_usuario FROM POSTAGENS WHERE ID_PAI is null;");  
+        // and id_usuario !=".$_SESSION['id_usuario'].";");
+    
+        //var_dump($consulta->fetchAll());
+        return $consulta->fetchAll();
+        
     }
 }
 
