@@ -1,0 +1,35 @@
+Home:
+
+Minhas postagens com mais likes
+
+Minhas postagens com mais interações
+
+Minhas postagens com mais argumentos a favor
+
+Minhas postagens com mais argumentos contra
+
+Hashtags mais citadas nas respostas das minhas postagens
+
+Minhas postagens 
+
+
+Postagens mais populares no meu país
+
+Postagens mais populares no minha cidade
+
+
+
+Index:
+
+(criar botão para ir para o login)
+
+Hanking das hashtags em alta (botão engrenagem para) -> (permitir filtro por cidade, país, data_inicio, data_fim)
+
+Destaques:
+
+Postagens com mais likes
+
+Postagens com mais interações
+
+
+
