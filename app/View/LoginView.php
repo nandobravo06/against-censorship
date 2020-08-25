@@ -14,7 +14,7 @@
 	<div class="container">
 
 		<div class="row">
-			<form class="col-12" action="login/logar" method="POST">
+			<form class="col-12" action="{{url}}login/logar" method="POST">
 				<div class="row">
 					<legend>Login</legend>
 					<input type="text" name="login" class="form-control">

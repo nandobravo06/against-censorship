@@ -13,41 +13,31 @@
 <body>
 	<div class="container">
 		<div class="row">
-			
-				<?php
-
-					include('partial/cabecalho.php');
-
-				?>
-		
-				<form class="col-12" enctype="multipart/form-data" action="publicar.php" method="POST">
-					<legend>Em que você acredita?</legend>
-					<div class="row">
-						<input type="textarea" name="publicacao" class="form-control publicacao" rows="5">
-						
-						<input type="file" id="imagem" name="imagem[]"  multiple="multiple" accept="image/*" alt="Selecione imagens">
-
-						<div id="dvPreview">
-						</div>
-						
-						<input type="submit" name="publicar" value="publicar" class="form-control">
-						
-					</div>
-
-				</form>
-				
-
-				<div class="col-12">
-
-				<hr>
-
-				<?php
-
-				include('lista_publicacoes.php');
-
-				?>
-
+			<h1>
+				<a href="http://localhost/against-censorship/postagem">POSTAGEM</a>
+			</h1>
+			<div class="bloco_mensagem col-12">
+				<h2>Minhas postagens com mais likes</h2>
+				{{postagens_mais_likes}}
 			</div>
+			<div class="bloco_mensagem col-12">
+				<h2>Minhas postagens com mais interações</h2>
+				{{postagens_mais_interacoes}}
+			</div>
+			<div class="bloco_mensagem col-12">
+				<h2>Minhas postagens com mais argumentos a favor</h2>
+				{{postagens_mais_argumentos_favor}}
+			</div>
+			<div class="bloco_mensagem col-12">
+				<h2>Minhas postagens com mais argumentos contra</h2>
+				{{postagens_mais_argumentos_contra}}
+			</div>
+			<div class="bloco_mensagem col-12">
+				<h2>Hashtags mais citadas nas respostas das minhas postagens </h2>
+				{{hashtags_mais_citadas_respostas}}
+			</div>
+			
+				
 		</div>
 
 	</div>

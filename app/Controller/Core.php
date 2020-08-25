@@ -26,14 +26,16 @@ Class Core{
             $controller = ucfirst(@$parametros[0]).'Controller';
 
             array_shift($parametros);
+            //var_dump($parametros);
 
             $metodo = @$parametros[0];
 
-            if(!$metodo){
+            if(strcmp($metodo,"")==0){
                 $metodo='index';
             }
 
             array_shift($parametros);
+            //var_dump($parametros);
 
             if(class_exists($controller)){
                 //echo("controller encontrada");
@@ -44,11 +46,11 @@ Class Core{
 
                 }else{
                     //echo("2"); 
-                    call_user_func_array(array("ErroController", 'index'),$parametros);
+                    all_user_func_array(array("ErroController", 'index'),array($parametros));
                 }
             }else{
                 //echo("3"); 
-                call_user_func_array(array("ErroController", 'index'),$parametros);
+                call_user_func_array(array("ErroController", 'index'),array($parametros));
             }
         }
     }

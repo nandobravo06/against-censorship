@@ -16,17 +16,19 @@ class Login{
 
         $pdo = ConexaoBD::get_conexao();
 
-        $consulta = $pdo->prepare("SELECT hsenha, id FROM USUARIOS WHERE login=?;");
+        $consulta = $pdo->prepare("SELECT hsenha, id FROM USUARIO WHERE login=?;");
         $consulta -> execute(array($login));
 
         $logado = false;
 
+        
+
         if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+            //var_dump($linha);
 
             $hsenha = "{$linha['hsenha']}";
             $id = "{$linha['id']}";
-
-            //echo('ID: '.$id);
         
             if(password_verify($senhacrua, $hsenha)){
             

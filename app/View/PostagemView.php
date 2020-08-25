@@ -3,17 +3,19 @@
 <head>
 	<title>Login</title>
 	{{meta}}
-	<?php
-		include('./Template/Partial/meta.php');
-	?>
-
 
 </head>
 
 <body>
 	<div class="container">
 		<div class="row">
+
+			{{nova_postagem}}
+
             {{postagens}}
+
+			{{respostas}}
+
 		</div>
 	</div>
 
