@@ -1,7 +1,7 @@
 <form class="col-12" enctype="multipart/form-data" action="{{url}}postagem/publicar_postagem" method="POST">
-    <legend>Em que você acredita?</legend>
+    <legend><h1>Em que você acredita?</h1></legend>
     <div class="row">
-        <input type="textarea" name="publicacao" class="form-control publicacao" rows="5">
+        <input type="textarea" name="publicacao" class="publicacao" rows="5" cols="50" wrap>
         
         <input type="file" id="imagem" name="imagem[]"  multiple="multiple" accept="image/*" alt="Selecione imagens">
 

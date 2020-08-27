@@ -2,6 +2,7 @@
 
 include_once('app/Model/Postagem.php');
 include_once('app/View/Renderizador.php');
+include_once('app/Model/like_postagem.php');
 
 class PostagemController{
 
@@ -71,36 +72,41 @@ class PostagemController{
                 <span class="col-11" name="publicacao'.$id_postagem.'">'.$texto.'</span></a>';
                 
                 if(strcmp($id_usuario,"{$linha['id_usuario']}")==0){
-                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="/vsm/img/lixeira.png" class="lixeira"/></a></div>';
+                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="{{url}}img/lixeira.png" class="lixeira"/></a></div>';
                 }
                 
                 //echo('</span></a>');
 
                 
 
-            //$relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
+            $relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
 
-            //$quantidade_arquivos_imagens=0;
+            //$relacao_nomes_arquivos_imagens = $postagem -> salvar_imagens();
 
-            /*
+            //var_dump($relacao_nomes_arquivos_imagens);
 
-            if($relacao_nomes_arquivos_imagens!=[]){
-                $quantidade_arquivos_imagens = count($relacao_nomes_arquivos_imagens);
-                echo('<div class="col-12">');
+            //die();
 
-                foreach($relacao_nomes_arquivos_imagens as $imagem){
-                    //echo(strval($imagem)."<br>");
-                    echo('<img width="200" height="200" class="imagem" src="/vsm/arquivos/imagens_postagens/'.$imagem.'"/>');
-                    //print_r('aqui');
-                }
-                echo('</div>');
-            }*/
+            $quantidade_arquivos_imagens=0;
 
             
 
+            if($relacao_nomes_arquivos_imagens!=[]){
+                $quantidade_arquivos_imagens = count($relacao_nomes_arquivos_imagens);
+                $html_postagens.='<div class="col-12">';
 
-            //echo('<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>');
-            //echo('<div id="likes_postagem'.$id_postagem.'" class="col-11 quatidade_likes">'.obter_likes_postagem($id_postagem).'</div><hr>');
+                foreach($relacao_nomes_arquivos_imagens as $imagem){
+                    //echo(strval($imagem)."<br>");
+                    $html_postagens.='<img width="200" height="200" class="imagem" src="{{url}}arquivos/imagens_postagens/'.$imagem.'"/>';
+                    //print_r('aqui');
+                }
+                $html_postagens.='</div>';
+            }
+
+            $html_postagens.='<div class="col-12">';
+            $html_postagens.='<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>';
+            $html_postagens.='<span id="likes_postagem'.$id_postagem.'" class="quatidade_likes">'.obter_likes_postagem($id_postagem).'</span>';
+            $html_postagens.='</div>';
             $html_postagens.='<a href="#divconcordo"'.$id_postagem.'" class="form-control col-md-6 concordo"
             rel="modal:open">Concordo</a><br>';
             //echo('<a href="#ex1"  rel="modal:open">Open Modal</a></p>');
@@ -130,7 +136,7 @@ class PostagemController{
             $html_postagens.='<input type="submit" id="submit'.$id_postagem.'" value="enviar resposta" class="form-control">';
             $html_postagens.='</form>';
             
-            $html_postagens.='</div>';
+            $html_postagens.='<hr></div>';
 
         }
 
@@ -173,36 +179,37 @@ class PostagemController{
                 <span class="col-11 postagens-publicadas" name="publicacao'.$id_postagem.'">'.$texto.'</span>';
                 
                 if(strcmp($id_usuario,"{$linha['id_usuario']}")==0){
-                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="/vsm/img/lixeira.png" class="lixeira"/></a></div>';
+                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="{{url}}img/lixeira.png" class="lixeira"/></a></div>';
                 }
                 
                 //echo('</span></a>');
 
                 
 
-            //$relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
+            $relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
 
-            //$quantidade_arquivos_imagens=0;
-
-            /*
-
-            if($relacao_nomes_arquivos_imagens!=[]){
-                $quantidade_arquivos_imagens = count($relacao_nomes_arquivos_imagens);
-                echo('<div class="col-12">');
-
-                foreach($relacao_nomes_arquivos_imagens as $imagem){
-                    //echo(strval($imagem)."<br>");
-                    echo('<img width="200" height="200" class="imagem" src="/vsm/arquivos/imagens_postagens/'.$imagem.'"/>');
-                    //print_r('aqui');
-                }
-                echo('</div>');
-            }*/
+            $quantidade_arquivos_imagens=0;
 
             
 
+            if($relacao_nomes_arquivos_imagens!=[]){
+                $quantidade_arquivos_imagens = count($relacao_nomes_arquivos_imagens);
+                $html_postagens.='<div class="col-12">';
 
-            //echo('<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>');
-            //echo('<div id="likes_postagem'.$id_postagem.'" class="col-11 quatidade_likes">'.obter_likes_postagem($id_postagem).'</div><hr>');
+                foreach($relacao_nomes_arquivos_imagens as $imagem){
+                    //echo(strval($imagem)."<br>");
+                    $html_postagens.='<img width="200" height="200" class="imagem" src="{{url}}arquivos/imagens_postagens/'.$imagem.'"/>';
+                    //print_r('aqui');
+                }
+                $html_postagens.='</div>';
+            }
+
+            
+
+            $html_postagens.='<div class="col-12">';
+            $html_postagens.='<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>';
+            $html_postagens.='<span id="likes_postagem'.$id_postagem.'" class="quatidade_likes">'.obter_likes_postagem($id_postagem).'</span>';
+            $html_postagens.='</div>';
             $html_postagens.='<a href="#divconcordo"'.$id_postagem.'" class="form-control col-md-6 concordo"
             rel="modal:open">Concordo</a><br>';
             //echo('<a href="#ex1"  rel="modal:open">Open Modal</a></p>');
@@ -232,7 +239,7 @@ class PostagemController{
             $html_postagens.='<input type="submit" id="submit'.$id_postagem.'" value="enviar resposta" class="form-control">';
             $html_postagens.='</form>';
             
-            $html_postagens.='</div>';
+            $html_postagens.='<hr></div>';
 
         }
 
@@ -296,37 +303,39 @@ class PostagemController{
                 <span class="col-11" name="publicacao'.$id_postagem.'">'.$texto.'</span></a>';
                 
                 if(strcmp($id_usuario,"{$linha['id_usuario']}")==0){
-                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="/vsm/img/lixeira.png" class="lixeira"/></a></div>';
+                    $html_postagens.='<div class="col-1 lixeira"><a href="{{url}}postagem/excluir_postagem/'.$id_postagem.'"><img src="{{url}}img/lixeira.png" class="lixeira"/></a></div>';
                 }
                 
                 //echo('</span></a>');
 
                 
 
-            //$relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
+            $relacao_nomes_arquivos_imagens = json_decode("{$linha['list_imagens']}");
 
-            //$quantidade_arquivos_imagens=0;
+            $quantidade_arquivos_imagens=0;
 
-            /*
+            
 
             if($relacao_nomes_arquivos_imagens!=[]){
                 $quantidade_arquivos_imagens = count($relacao_nomes_arquivos_imagens);
-                echo('<div class="col-12">');
+                $html_postagens.='<div class="col-12">';
 
                 foreach($relacao_nomes_arquivos_imagens as $imagem){
                     //echo(strval($imagem)."<br>");
-                    echo('<img width="200" height="200" class="imagem" src="/vsm/arquivos/imagens_postagens/'.$imagem.'"/>');
+                    $html_postagens.='<img width="200" height="200" class="imagem" src="{{url}}arquivos/imagens_postagens/'.$imagem.'"/>';
                     //print_r('aqui');
                 }
-                echo('</div>');
-            }*/
+                $html_postagens.='</div>';
+            }
 
             
-            /*
+            
 
-            //echo('<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>');
-            //echo('<div id="likes_postagem'.$id_postagem.'" class="col-11 quatidade_likes">'.obter_likes_postagem($id_postagem).'</div><hr>');
-            $html_postagens.='<a href="#divconcordo"'.$id_postagem.'" class="form-control col-md-6 concordo"
+            $html_postagens.='<div class="col-12">';
+            $html_postagens.='<img id="like_postagem'.$id_postagem.'" class="like" src="'.obter_imagem_like_postagem($id_postagem).'" onclick="like_postagem('.$id_postagem.')"/>';
+            $html_postagens.='<span id="likes_postagem'.$id_postagem.'" class="quatidade_likes">'.obter_likes_postagem($id_postagem).'</span>';
+            $html_postagens.='<hr></div>';
+            /*$html_postagens.='<a href="#divconcordo"'.$id_postagem.'" class="form-control col-md-6 concordo"
             rel="modal:open">Concordo</a><br>';
             //echo('<a href="#ex1"  rel="modal:open">Open Modal</a></p>');
             //echo('<input type="button" value="concordo"  class="form-control col-md-6" onclick="concordo('.$id_postagem.')"/><br>');

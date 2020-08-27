@@ -56,10 +56,10 @@ $.post('like_postagem.php',{id_postagem: id},function(retorno){
 	
 
 	if(devolucao.status==1){
-		$("#like_postagem"+id).attr("src","img/like.jpg");
+		$("#like_postagem"+id).attr("src","http://localhost/against-censorship/img/like.jpg");
 	}
 	else if(devolucao.status==0){
-		$("#like_postagem"+id).attr("src","img/neutro.jpg");
+		$("#like_postagem"+id).attr("src","http://localhost/against-censorship/img/neutro.jpg");
 	}
 
 	$("#likes_postagem"+id).text(devolucao.likes);

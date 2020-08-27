@@ -4,6 +4,9 @@ class Imagem{
 
     public function publicar($nome, $extensao, $id_postagem, $conteudo, $miniatura=null){
 
+        $pdo = ConexaoBD::get_conexao();
+
+
         /*
         o parâmetro ativo é setado como 1 para ativo;
         -1 para inativo

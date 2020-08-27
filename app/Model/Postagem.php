@@ -56,7 +56,8 @@ Class Postagem{
         echo("_SESSION['id_usuario']: ".$_SESSION['id_usuario']);
 
 
-        //relacao_nomes_arquivos_imagens = salvar_imagens();
+        //$relacao_nomes_arquivos_imagens = this ->salvar_imagens();
+        $relacao_nomes_arquivos_imagens = Postagem::salvar_imagens($id_postagem_pai);
 
         $retorno="";
         
@@ -71,9 +72,9 @@ Class Postagem{
             //$sth ->execute(array($_SESSION['id_usuario'],$id_postagem_pai, $tipo, $texto_publicacao,$now->format('Y-m-d H:i:s'),$relacao_nomes_arquivos_imagens));
             
 
-            $sth = $pdo ->prepare("INSERT into  postagem (id_usuario, id_postagem_pai, tipo, texto_conteudo) values(?,?,?,?) ;");
+            $sth = $pdo ->prepare("INSERT into  postagem (id_usuario, id_postagem_pai, tipo, texto_conteudo, list_imagens) values(?,?,?,?,?) ;");
             //echo('passo 2');
-            $sth ->execute(array($_SESSION['id_usuario'],$id_postagem_pai, $tipo, $texto_publicacao));
+            $sth ->execute(array($_SESSION['id_usuario'],$id_postagem_pai, $tipo, $texto_publicacao, $relacao_nomes_arquivos_imagens));
             //echo('passo 3');
 
             echo('<br>dump da $pdo <br>');
@@ -128,12 +129,9 @@ Class Postagem{
         }
     }
 
-    public function salvar_imagens(){
+    public static function salvar_imagens($id_postagem_pai=""){
 
         $uploaddir = 'arquivos/imagens_postagens/';
-        
-        $min = 100000000000;
-        $max = 900000000000;
         
         $imagem = 'imagem'.$id_postagem_pai;
         
@@ -146,26 +144,21 @@ Class Postagem{
             $relacao_nomes_arquivos_imagens = [];
             for ($i =0; $i<$countfiles; $i++) 
             {
-                
-                //echo("passou aqui - ".$i);
-            
-                $aleatorio = strval(rand ($min, $max));
-                $horario = strval(time());
+
+                $aleatorio = md5(uniqid(rand(), true));
                 
                 $extensao = substr(strval($_FILES[$imagem]['name'][$i]),-4);
             
-                $nome_arquivo = $horario."_".$i."_".$aleatorio.$extensao;
+                $nome_arquivo = $aleatorio.$extensao;
             
                 array_push($relacao_nomes_arquivos_imagens, $nome_arquivo);
                     
                 $uploadfile = $uploaddir. $nome_arquivo;
-            
-                
                 
                 if (move_uploaded_file($_FILES[$imagem]['tmp_name'][$i], $uploadfile)) {
-                    //echo "Arquivo válido e enviado com sucesso.\n";
+                    echo "Arquivo válido e enviado com sucesso.\n";
                 } else {
-                    //echo "Possível ataque de upload de arquivo!\n";
+                    echo "Possível ataque de upload de arquivo!\n";
                 }
 
             
@@ -174,6 +167,7 @@ Class Postagem{
             return json_encode($relacao_nomes_arquivos_imagens);
                     
         }
+        return null;
 
     }
     public function listar_postagens(){
@@ -192,7 +186,7 @@ Class Postagem{
     
         //echo("<br>"."SELECT texto_conteudo, id_postagem, list_imagens FROM POSTAGENS WHERE ID_PAI is NULL and id_usuario !=".$_SESSION['id_usuario'].";");
     
-        $consulta = $pdo->query("SELECT texto_conteudo, id, id_usuario FROM POSTAGEM WHERE ID_POSTAGEM_PAI is null;");  
+        $consulta = $pdo->query("SELECT texto_conteudo, id, id_usuario, list_imagens FROM POSTAGEM WHERE ID_POSTAGEM_PAI is null;");  
         // and id_usuario !=".$_SESSION['id_usuario'].";");
     
         //var_dump($consulta->fetchAll());
@@ -221,7 +215,7 @@ Class Postagem{
         //$consulta = $pdo->query("SELECT texto_conteudo, id, id_usuario FROM POSTAGEM WHERE ID_POSTAGEM_PAI is null;");  
         
 
-        $consulta = $pdo ->prepare("SELECT texto_conteudo, id, id_usuario FROM POSTAGEM WHERE ID = ? ;");
+        $consulta = $pdo ->prepare("SELECT texto_conteudo, id, id_usuario, list_imagens FROM POSTAGEM WHERE ID = ? ;");
             //echo('passo 2');
         $consulta ->execute(array($id_postagem));
             //echo('passo 3');
@@ -251,7 +245,7 @@ Class Postagem{
     
         //echo("<br>"."SELECT texto_conteudo, id_postagem, list_imagens FROM POSTAGENS WHERE ID_PAI is NULL and id_usuario !=".$_SESSION['id_usuario'].";");
     
-        $consulta = $pdo ->prepare("SELECT texto_conteudo, id, id_usuario FROM POSTAGEM WHERE id_postagem_pai  = ? and tipo = ? ;");
+        $consulta = $pdo ->prepare("SELECT texto_conteudo, id, id_usuario, list_imagens FROM POSTAGEM WHERE id_postagem_pai  = ? and tipo = ? ;");
             //echo('passo 2');
         $consulta ->execute(array($id_postagem, $tipo));
             //echo('passo 3');
